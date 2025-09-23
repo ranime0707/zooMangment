@@ -1,36 +1,57 @@
-import java.util.Scanner;
+    public class zooManagement {
+        public static void main(String[] args) {
+            Animal lyon = new Animal("lyon", "Simba", 6, true);
+            Zoo myZoo = new Zoo("Belvedaire", "Tunis");
 
-public class zooManagement {
-    public static void main(String[] args) {
-       /* int nbrCages=20;
-        String ZooName= "My Zoo";
-        System.out.println("Zoo Name: "+ZooName + "nbr Cages: "+nbrCages);
-        Scanner input = new Scanner(System.in) ;
-        System.out.println("insert zoo name");
-        ZooName = input.nextLine();
+            System.out.println("Welcome to the Zoo management system");
+            myZoo.displayZoo();
 
-        System.out.println("insert zoo age");
-        nbrCages = input.nextInt();
-        System.out.println("Zoo Name: "+ZooName+ " nbr Cages: "+nbrCages);
-        */
-        Animal lyon= new Animal();
-        lyon.name="Simba";
-        lyon.family="lyon";
-        lyon.age=6;
-        lyon.isMammal=true;
-        Zoo myZoo= new Zoo();
-        myZoo.name="belvedaire";
-        myZoo.city="Tunis";
-        myZoo.nbrCages=25;
-        myZoo.animals= new Animal[25];
+            // 🔹 Ajout d'animaux
+            Animal tiger = new Animal("tiger", "Bagira", 8, true);
+            Animal elephant = new Animal("elephant", "Dumbo", 12, true);
 
-        System.out.println("Welcome to the Zoo management system");
-        System.out.println("zoo" + myZoo.name);
-        Animal tiger=new Animal("tiger","Bagira",8,true);
+            myZoo.addAnimal(lyon);
+            myZoo.addAnimal(tiger);
+            myZoo.addAnimal(elephant);
 
-        myZoo.displayZoo();
-        System.out.println(myZoo);
-        lyon.displayAnimal();
-        System.out.println(lyon);
+            // 🔹 Afficher les animaux
+            System.out.println("\n--- Liste des animaux du zoo ---");
+            myZoo.displayAnimals();
+
+            // 🔹 Test recherche
+            System.out.println("\nRecherche de Simba :");
+            int index = myZoo.searchAnimal(lyon);
+            System.out.println("Résultat : " + index);
+
+            // 🔹 Ajouter un autre animal identique
+            Animal simba2 = new Animal("lyon", "Simba", 6, true);
+            int index2 = myZoo.searchAnimal(simba2);
+            System.out.println("Résultat recherche de Simba2 : " + index2);
+
+
+            boolean addedSimba2 = myZoo.addAnimal(simba2);
+            System.out.println("\nAjout d'un deuxième Simba : " + addedSimba2);
+
+
+            System.out.println("\nSuppression de Dumbo : " + myZoo.removeAnimal(elephant));
+            System.out.println("\n--- Liste après suppression ---");
+            myZoo.displayAnimals();
+
+
+            System.out.println("\nZoo plein ? " + myZoo.isZooFull());
+            System.out.println("Zoo plein (après tentatives) ? " + myZoo.isZooFull());
+
+
+
+            Zoo zoo2 = new Zoo("Friguia", "Hammamet");
+            zoo2.addAnimal(new Animal("lion", "Nala", 4, true)); // 1 animal
+
+            Zoo bigger = Zoo.comparerZoo(myZoo, zoo2);
+            System.out.println("\nLe zoo avec le plus d'animaux est : " + bigger.name);
+
+
+
+        }
+
+
     }
-}
